@@ -1,0 +1,5 @@
+C:\Users\cormi\Desktop\ClearCache\ClearCache.exe
+C:\Users\cormi\Desktop\ClearCache\ClearCache.dll
+C:\Users\cormi\Desktop\ClearCache\ClearCache.deps.json
+C:\Users\cormi\Desktop\ClearCache\ClearCache.runtimeconfig.json
+C:\Users\cormi\Desktop\ClearCache\ClearCache.pdb
