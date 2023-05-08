@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "hnu/pp8dMHaFCX3HFCut9Ei7kuNKhHqKjYpPYha+t2mmdjBAK1cs5u8IrVnbIRKgEv50jKpvAYLPHqh/JR3QMQ==",
+  "dgSpecHash": "/Wz99NxcKChw9SGY5dli+8/WasAUrjr/8O29ofBztmkxuqrBcwU8jMLGiCjE0J9Lyz9G8mbMvfFwnJclFcC2nQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\cormi\\source\\repos\\ClearCache\\ClearCache\\ClearCache.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\cormi\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

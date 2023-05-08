@@ -30,28 +30,53 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             button1 = new Button();
+            menuStrip1 = new MenuStrip();
+            fichierToolStripMenuItem = new ToolStripMenuItem();
+            quitToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // button1
             // 
-            button1.AllowDrop = true;
-            button1.FlatAppearance.BorderColor = Color.Black;
-            button1.FlatAppearance.BorderSize = 2;
-            button1.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 0, 0);
+            button1.BackColor = SystemColors.WindowFrame;
             resources.ApplyResources(button1, "button1");
-            button1.ForeColor = SystemColors.Desktop;
+            button1.FlatAppearance.BorderSize = 2;
+            button1.ForeColor = SystemColors.InfoText;
             button1.Name = "button1";
-            button1.UseVisualStyleBackColor = true;
+            button1.TabStop = false;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fichierToolStripMenuItem });
+            resources.ApplyResources(menuStrip1, "menuStrip1");
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
+            // 
+            // fichierToolStripMenuItem
+            // 
+            fichierToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { quitToolStripMenuItem });
+            fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
+            resources.ApplyResources(fichierToolStripMenuItem, "fichierToolStripMenuItem");
+            fichierToolStripMenuItem.Click += fichierToolStripMenuItem_Click;
+            // 
+            // quitToolStripMenuItem
+            // 
+            quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            resources.ApplyResources(quitToolStripMenuItem, "quitToolStripMenuItem");
+            quitToolStripMenuItem.Click += quitToolStripMenuItem_Click;
+            //
             // Form1
             // 
             resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.WindowFrame;
+            BackColor = SystemColors.ScrollBar;
             BackgroundImage = Properties.Resources.redm;
             Controls.Add(button1);
+            Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
+            MainMenuStrip = menuStrip1;
             MaximizeBox = false;
             MdiChildrenMinimizedAnchorBottom = false;
             MinimizeBox = false;
@@ -59,13 +84,16 @@
             ShowIcon = false;
             ShowInTaskbar = false;
             TransparencyKey = Color.Black;
-            WindowState = FormWindowState.Normal;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
-
+            PerformLayout();
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fichierToolStripMenuItem;
+        private ToolStripMenuItem quitToolStripMenuItem;
+        private Button button1;
     }
 }

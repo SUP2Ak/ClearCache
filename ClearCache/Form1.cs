@@ -1,7 +1,8 @@
+using System.IO;
 using System.Diagnostics;
 using System.Security.AccessControl;
 using System.Windows.Forms;
-
+using Newtonsoft.Json;
 namespace ClearCache
 {
     public partial class Form1 : Form
@@ -14,24 +15,18 @@ namespace ClearCache
         private const string ServerCachePrivFolder = "server-cache-priv";
         private const string TempFolder = "Temp";
         private const string PrefetchFolder = "Prefetch";
+        private readonly string[] FoldersToDelete;
         private System.Windows.Forms.TextBox textBox1;
 
-        private readonly string[] FoldersToDelete =
+        public class AppConfig
         {
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", LogsFolder),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", CrashesFolder),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", CacheFolder),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", NuiStorageFolder),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", ServerCacheFolder),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", ServerCachePrivFolder),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), TempFolder + "*.*"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), PrefetchFolder + "*.*"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), TempFolder + "*.*")
-        };
+            public string FiveMFolder { get; set; }
+        }
 
         public Form1()
         {
             InitializeComponent();
+
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox1.Location = new System.Drawing.Point(0, this.ClientSize.Height - 200); // Position du TextBox
             this.textBox1.Multiline = true; // Permet plusieurs lignes
@@ -39,6 +34,50 @@ namespace ClearCache
             this.textBox1.Size = new System.Drawing.Size(this.ClientSize.Width, 300); // Taille du TextBox
             this.textBox1.TabIndex = 0;
             this.Controls.Add(this.textBox1);
+
+            AppConfig config;
+            try
+            {
+                string configFilePath = Path.Combine(Application.StartupPath, "config.json");
+                string configData = File.ReadAllText(configFilePath);
+                config = JsonConvert.DeserializeObject<AppConfig>(configData);
+            }
+            catch (Exception ex)
+            {
+                // Si le fichier JSON ne peut pas être chargé, utilisez une configuration par défaut
+                config = new AppConfig();
+            }
+
+            FoldersToDelete = (config != null && !string.IsNullOrEmpty(config.FiveMFolder) && Directory.Exists(config.FiveMFolder)) ? new string[]
+            {
+                Path.Combine(config.FiveMFolder, "FiveM.app", LogsFolder),
+                Path.Combine(config.FiveMFolder, "FiveM.app", CrashesFolder),
+                Path.Combine(config.FiveMFolder, "FiveM.app", "data", CacheFolder),
+                Path.Combine(config.FiveMFolder, "FiveM.app", "data", NuiStorageFolder),
+                Path.Combine(config.FiveMFolder, "FiveM.app", "data", ServerCacheFolder),
+                Path.Combine(config.FiveMFolder, "FiveM.app", "data", ServerCachePrivFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), TempFolder + "*.*"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), PrefetchFolder + "*.*"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), TempFolder + "*.*")
+            } : new string[]
+            {
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", LogsFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", CrashesFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", CacheFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", NuiStorageFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", ServerCacheFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FiveM", "FiveM.app", "data", ServerCachePrivFolder),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), TempFolder + "*.*"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), PrefetchFolder + "*.*"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), TempFolder + "*.*"),
+            };
+
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Code à exécuter lors du clic sur le menu Quitter
+            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -147,5 +186,16 @@ namespace ClearCache
 
             return processes;
         }
+
+        private void fichierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
     }
 }

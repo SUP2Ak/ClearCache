@@ -16,3 +16,5 @@ C:\Users\cormi\source\repos\ClearCache\ClearCache\obj\Debug\net6.0-windows\Clear
 C:\Users\cormi\source\repos\ClearCache\ClearCache\obj\Debug\net6.0-windows\ClearCache.genruntimeconfig.cache
 C:\Users\cormi\source\repos\ClearCache\ClearCache\obj\Debug\net6.0-windows\ref\ClearCache.dll
 C:\Users\cormi\source\repos\ClearCache\ClearCache\obj\Debug\net6.0-windows\ClearCache.Properties.Resources.resources
+C:\Users\cormi\source\repos\ClearCache\ClearCache\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
+C:\Users\cormi\source\repos\ClearCache\ClearCache\obj\Debug\net6.0-windows\ClearCache.csproj.CopyComplete
