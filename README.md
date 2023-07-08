@@ -31,3 +31,6 @@ This script allows you to clear cache files from your computer (Windows & FiveM)
 ## License
 
 This project is under [GNU General Public License v3.0](LICENSE).
+
+
+![GitHub all releases](https://img.shields.io/github/downloads/SUP2Ak/ClearCache/total?color=%2329c785&style=for-the-badge) 
